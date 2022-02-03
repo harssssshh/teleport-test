@@ -73,7 +73,7 @@ data:
     {{- toYaml .Values.labels | nindent 8 }}
   {{- end }}
     proxy_service:
-      public_addr: '{{ required "clusterName is required in chart values" .Values.clusterName }}:443'
+      public_addr: '{{ required "clusterName is required in chart values" .Values.clusterName }}:444'
   {{- if not .Values.proxyListenerMode }}
       kube_listen_addr: 0.0.0.0:3026
       mysql_listen_addr: 0.0.0.0:3036
@@ -82,7 +82,7 @@ data:
   {{- if .Values.highAvailability.certManager.enabled }}
       https_keypairs:
       - key_file: /etc/teleport-tls/tls.key
-        cert_file: /etc/teleport-tls/tls.crt
+        cert_file: /etc/teleport-tls/tls.crt 
   {{- else if .Values.acme }}
       acme:
         enabled: {{ .Values.acme }}
@@ -91,6 +91,9 @@ data:
         uri: {{ .Values.acmeURI }}
     {{- end }}
   {{- end }}
+      https_keypairs:
+      - key_file: /etc/teleport-tls/tls.key
+        cert_file: /etc/teleport-tls/tls.crt
     ssh_service:
       enabled: false
 {{- end -}}

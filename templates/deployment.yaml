@@ -78,6 +78,8 @@ spec:
     {{- toYaml .Values.resources | nindent 10 }}
   {{- end }}
         volumeMounts:
+        - mountPath: /etc/teleport-tls
+          name: "teleport-tls"
   {{- if .Values.enterprise }}
         - mountPath: /var/lib/license
           name: "license"
@@ -147,6 +149,8 @@ spec:
   {{- toYaml .Values.resources | nindent 10 }}
 {{- end }}
         volumeMounts:
+        - mountPath: /etc/teleport-tls
+          name: "teleport-tls"
 {{- if .Values.enterprise }}
         - mountPath: /var/lib/license
           name: "license"
@@ -171,6 +175,9 @@ spec:
   {{- toYaml .Values.extraVolumeMounts | nindent 8 }}
 {{- end }}
       volumes:
+      - name: teleport-tls
+        secret:
+         secretName: "teleport-tls"
 {{- if .Values.enterprise }}
       - name: license
         secret:
