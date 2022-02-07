@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: rfn
+  name: rfn
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rfn
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: rfn
+    spec:
+      containers:
+      - image: harssssshh/redditfornormies
+        name: redditfornormies
+        ports:
+        - containerPort: 8080
+        resources: {}
+status: {}
+
